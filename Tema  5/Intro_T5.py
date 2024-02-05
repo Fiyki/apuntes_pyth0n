@@ -1,11 +1,12 @@
-import datapane as dp
-import pandas as pd
 import os
 
+import datapane as dp
+import pandas as pd
+
 # Rutas de los archivos a guardar
-ruta_imprimir = "C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Imprimir_clase1.html"
-ruta_visualizar = "C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Visualizar_clase1.html"
-ruta_remix = "C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Remix.html"
+ruta_imprimir = "C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Imprimir_clase1.html"
+ruta_visualizar = "C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Visualizar_clase1.html"
+ruta_remix = "C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Remix.html"
 
 # Ruta del archivo CSV
 fichero_csv = "C:/Users/danmo/Downloads/DI_U05_A02_02.csv"
