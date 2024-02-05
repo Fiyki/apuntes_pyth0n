@@ -1,20 +1,61 @@
 import datapane as dp
 import pandas as pd
+import os
 
-fichero_csv = "C:/Users/danmo/Downloads/DI_U05_A02_02.csv"  # Ruta del archivo
-df = pd.read_csv(fichero_csv)  # cargammos el fichero en un Data frame
+# Rutas de los archivos a guardar
+ruta_imprimir = "C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Imprimir_clase1.html"
+ruta_visualizar = "C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Visualizar_clase1.html"
+ruta_remix = "C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Remix.html"
 
-table = dp.Table(df)  # Creamos un objeto tabla con los datos del Dataframe
-data_table = dp.DataTable(df)  # Creamos un objeto DataTable con los datos del Dataframe
+# Ruta del archivo CSV
+fichero_csv = "C:/Users/danmo/Downloads/DI_U05_A02_02.csv"
 
-# informe imprimir
-report_imprimir = dp.Report(table)  # Creamos un informe que solo podemos visualizar al usar el table
-report_imprimir.save( path="C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Imprimir_clase1.html",open=True)  # Guarda el informe en un fichero html y lo abre al iniciar el programa si queremos que solo lo genere el open= lo ponemos en false
+# Cargar el archivo CSV en un DataFrame
+df = pd.read_csv(fichero_csv)
 
-# informe_filtrar
-report_visualizar = dp.Report(data_table)  # Creamos un informe en el que podemos filtrar al usar el data_Table
-report_visualizar.save(path="C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Visualizar_clase1.html",open=True)  # Guarda el informe en un fichero html y lo abre al iniciar el programa si queremos que solo lo genere el open= lo ponemos en false
+# Crear objetos tabla y DataTable
+table = dp.Table(df)
+data_table = dp.DataTable(df)
 
-# Informe completo
-report = dp.Report(table, data_table)  # Creamos un informe que cree los 2 a la vez
-report.save( path="C:/Users/danmo/OneDrive/Escritorio/Dam 2/Desarrollo de interfaces/DesarrolloInterfaces_python1/Tema  5/Remix.html",open=True) # Guarda el informe en un fichero html y lo abre al iniciar el programa si queremos que solo lo genere el open= lo ponemos en false
+# Crear informe para imprimir
+report_imprimir = dp.Report(table)
+
+# Crear informe para visualizar
+report_visualizar = dp.Report(data_table)
+
+# Crear informe completo
+report = dp.Report(table, data_table)
+
+# Verificar si los archivos ya existen y preguntar si se desean sobrescribir
+if os.path.exists(ruta_imprimir):
+    respuesta = input("El archivo de impresión ya existe. ¿Deseas sobrescribirlo? (s/n): ")
+    if respuesta.lower() == 's':
+        if os.path.exists(ruta_imprimir):
+            os.remove(ruta_imprimir)  # Eliminar el archivo existente antes de guardar
+        report_imprimir.save(path=ruta_imprimir, open=True)
+    else:
+        print("El archivo de impresión no se ha sobrescrito.")
+else:
+    report_imprimir.save(path=ruta_imprimir, open=True)
+
+if os.path.exists(ruta_visualizar):
+    respuesta = input("El archivo de visualización ya existe. ¿Deseas sobrescribirlo? (s/n): ")
+    if respuesta.lower() == 's':
+        if os.path.exists(ruta_visualizar):
+            os.remove(ruta_visualizar)  # Eliminar el archivo existente antes de guardar
+        report_visualizar.save(path=ruta_visualizar, open=True)
+    else:
+        print("El archivo de visualización no se ha sobrescrito.")
+else:
+    report_visualizar.save(path=ruta_visualizar, open=True)
+
+if os.path.exists(ruta_remix):
+    respuesta = input("El archivo de remix ya existe. ¿Deseas sobrescribirlo? (s/n): ")
+    if respuesta.lower() == 's':
+        if os.path.exists(ruta_remix):
+            os.remove(ruta_remix)  # Eliminar el archivo existente antes de guardar
+        report.save(path=ruta_remix, open=True)
+    else:
+        print("El archivo de remix no se ha sobrescrito.")
+else:
+    report.save(path=ruta_remix, open=True)
