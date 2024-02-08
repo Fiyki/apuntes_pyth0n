@@ -1,7 +1,6 @@
 import datapane as dp
 import pandas as pd
 import os
-
 fichero_csv = "DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
 
 # Cargar el archivo CSV en un DataFrame
