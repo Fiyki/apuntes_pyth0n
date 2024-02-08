@@ -2,7 +2,7 @@ import datapane as dp
 import pandas as pd
 import os
 
-fichero_csv = "C:/Users/danmo/Downloads/DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
+fichero_csv = "DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
 
 # Cargar el archivo CSV en un DataFrame
 df = pd.read_csv(fichero_csv)  # Carga el archivo CSV en un DataFrame
@@ -25,7 +25,7 @@ comparativa_fin_año = dp.BigNumber(
 
 # Guardar el informe de la comparativa entre diciembre y noviembre
 report_fin_año = dp.Report(comparativa_fin_año)
-report_fin_año.save(path="C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Comparativa_fin_año.html", open=True)
+report_fin_año.save(path="Comparativa_fin_año.html", open=True)
 
 # Filtrar los datos del mes de enero
 datos_enero = df[df["Mes"] == "Enero"]
@@ -48,4 +48,4 @@ comparativa_principio_año = dp.BigNumber(
 
 # Guardar el informe de la comparativa entre enero y febrero
 report_principio_año = dp.Report(comparativa_principio_año)
-report_principio_año.save(path="C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Comparativa_principio_año.html", open=True)
+report_principio_año.save(path="Comparativa_principio_año.html", open=True)

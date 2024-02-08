@@ -3,12 +3,12 @@ import datapane as dp  # Importa la biblioteca datapane como dp
 import pandas as pd  # Importa la biblioteca pandas como pd
 
 # Rutas de los archivos a guardar
-ruta_imprimir = "C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Imprimir_clase1.html"  # Ruta para guardar el archivo de impresión
-ruta_visualizar = "C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Visualizar_clase1.html"  # Ruta para guardar el archivo de visualización
-ruta_remix = "C:/Users/danmo/OneDrive/Documentos/GitHub/apuntes_pyth0n/Tema  5/Remix.html"  # Ruta para guardar el archivo remix
+ruta_imprimir = "Imprimir_clase1.html"  # Ruta para guardar el archivo de impresión
+ruta_visualizar = "Visualizar_clase1.html"  # Ruta para guardar el archivo de visualización
+ruta_remix = "Remix.html"  # Ruta para guardar el archivo remix
 
 # Ruta del archivo CSV
-fichero_csv = "C:/Users/danmo/Downloads/DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
+fichero_csv = "DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
 
 # Cargar el archivo CSV en un DataFrame
 df = pd.read_csv(fichero_csv)  # Carga el archivo CSV en un DataFrame
