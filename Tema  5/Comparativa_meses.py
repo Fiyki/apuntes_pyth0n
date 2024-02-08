@@ -1,6 +1,6 @@
 import datapane as dp
 import pandas as pd
-import os
+
 fichero_csv = "DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
 
 # Cargar el archivo CSV en un DataFrame
@@ -35,14 +35,14 @@ datos_febrero = df[df["Mes"] == "Febrero"]
 unidades_febrero = datos_febrero["Unidades"].sum()  # Sumar las unidades vendidas en febrero
 
 # Calcular la diferencia entre las unidades vendidas en febrero y enero
-diferencia_enero_febrero = unidades_febrero - unidades_enero
+report_inicio_año = unidades_febrero - unidades_enero
 
 # Crear el objeto BigNumber para la comparativa entre enero y febrero
 comparativa_principio_año = dp.BigNumber(
     heading="Unidades totales (Enero vs Febrero)",
     value=unidades_febrero,
-    change=abs(diferencia_enero_febrero),
-    is_upward_change=diferencia_enero_febrero > 0
+    change=abs(report_inicio_año),
+    is_upward_change=report_inicio_año > 0
 )
 
 # Guardar el informe de la comparativa entre enero y febrero
