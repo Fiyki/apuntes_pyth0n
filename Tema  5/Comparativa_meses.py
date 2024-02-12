@@ -14,11 +14,14 @@ unidades_diciembre = datos_diciembre["Unidades"].sum()  # Sumar las unidades ven
 datos_noviembre = df[df["Mes"] == "Noviembre"]
 unidades_noviembre = datos_noviembre["Unidades"].sum()  # Sumar las unidades vendidas en noviembre
 
+# Calcular la diferencia entre las unidades vendidas en diciembre y noviembre
+diferencia_diciembre_noviembre = unidades_diciembre - unidades_noviembre
+
 # Crear el objeto BigNumber para la comparativa entre diciembre y noviembre
 comparativa_fin_año = dp.BigNumber(
     heading="Unidades totales (Diciembre vs Noviembre)",
     value=unidades_diciembre,
-    change=unidades_diciembre - unidades_noviembre,
+    change=diferencia_diciembre_noviembre,  # Agregar la diferencia directamente aquí
     is_upward_change=unidades_diciembre > unidades_noviembre
 )
 
@@ -35,14 +38,14 @@ datos_febrero = df[df["Mes"] == "Febrero"]
 unidades_febrero = datos_febrero["Unidades"].sum()  # Sumar las unidades vendidas en febrero
 
 # Calcular la diferencia entre las unidades vendidas en febrero y enero
-report_inicio_año = unidades_febrero - unidades_enero
+diferencia_febrero_enero = unidades_febrero - unidades_enero
 
 # Crear el objeto BigNumber para la comparativa entre enero y febrero
 comparativa_principio_año = dp.BigNumber(
     heading="Unidades totales (Enero vs Febrero)",
     value=unidades_febrero,
-    change=abs(report_inicio_año),
-    is_upward_change=report_inicio_año > 0
+    change=abs(diferencia_febrero_enero),
+    is_upward_change=diferencia_febrero_enero > 0
 )
 
 # Guardar el informe de la comparativa entre enero y febrero
