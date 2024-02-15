@@ -1,53 +1,47 @@
-import datapane as dp
-import matplotlib.pyplot as plt
-import pandas as pd
+import datapane as dp  # Importa la biblioteca Datapane para la generación de informes
+import matplotlib.pyplot as plt  # Importa la biblioteca Matplotlib para la visualización de datos
+import pandas as pd  # Importa la biblioteca pandas para el manejo de datos
 
-fichero_csv = "DI_U05_A02_02.csv"  # Ruta del archivo CSV a cargar
+# Nombre del archivo CSV que contiene los datos
+fichero_csv = "DI_U05_A02_02.csv"
 
-# Cargar el archivo CSV en un DataFrame
-df = pd.read_csv(fichero_csv)  # Carga el archivo CSV en un DataFrame
+# Carga el archivo CSV en un DataFrame utilizando pandas
+df = pd.read_csv(fichero_csv)
 
-# Gráfico de líneas
-ventas_mes = df.groupby(['Mes'], sort=False).sum()  # Agrupar los datos por mes y sumar las unidades vendidas
-grafico_lineas = ventas_mes.plot(y='Unidades', color="red")  # Crear el gráfico de líneas utilizando matplotlib
-grafico_datapane_lineas = dp.Plot(grafico_lineas,
-                                  responsive=False)  # Convertir el gráfico de matplotlib a un objeto Plot de Datapane
+# Gráfico de líneas:
+# Agrupa los datos por mes y suma las ventas para cada mes
+ventas_mes = df.groupby(['Mes'], sort=False).sum()
+# Crea un gráfico de líneas utilizando Matplotlib con las unidades vendidas por mes
+grafico_matplot_lineas = ventas_mes.plot(y='Unidades', color='black')  # Se establece el color azul para las líneas
+# Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
+grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas, responsive=False)
 
-# Gráfico de barras
-ventas_vendedor = df.groupby(['Nombre']).sum()  # Agrupar los datos por nombre del vendedor y sumar los importes
-grafico_barras = ventas_vendedor.plot.bar(y='Importe (€)',
-                                          color="yellow")  # Crear el gráfico de barras utilizando matplotlib
-plt.tight_layout()  # Ajustar el diseño del gráfico para evitar que se corten las etiquetas
-grafico_datapane_barras = dp.Plot(grafico_barras,
-                                  responsive=False)  # Convertir el gráfico de matplotlib a un objeto Plot de Datapane
+# Gráfico de barras:
+# Agrupa los datos por vendedor y suma las unidades vendidas y el importe para cada vendedor
+ventas_vendedor = df.groupby(['Nombre']).sum()
+# Crea un gráfico de barras utilizando Matplotlib con el importe total vendido por cada vendedor
+grafico_matplotlib_barras = ventas_vendedor.plot.bar(y='Importe (€)',
+                                                     color='green')  # Se establece el color verde para las barras
+# Ajusta el diseño del gráfico para evitar que se corten las etiquetas
+plt.tight_layout()
+# Crea un objeto de gráfico de Datapane a partir del gráfico de barras de Matplotlib
+grafico_datapane_barras = dp.Plot(grafico_matplotlib_barras, responsive=False)
 
 # Gráfico de sectores
 grafico_sectores = ventas_vendedor.plot.pie(y='Unidades', legend=False, ylabel="",
                                             cmap='viridis')  # Crear el gráfico de sectores utilizando matplotlib
 grafico_datapane_sectores = dp.Plot(grafico_sectores,
                                     responsive=False)  # Convertir el gráfico de matplotlib a un objeto Plot de Datapane
-
-# Crear el informe que contiene los gráficos
+# Creación de informe con selectores:
+# Crea un informe de Datapane que contiene un selector para alternar entre los diferentes gráficos
 report = dp.Report(
-    dp.Group(
-        grafico_datapane_lineas,
-        grafico_datapane_barras,
-        grafico_datapane_sectores,
-        columns=2
+    dp.Select(
+        blocks=[
+            grafico_datapane_lineas, grafico_datapane_barras, grafico_datapane_sectores,
+            grafico_datapane_barras, grafico_datapane_sectores, grafico_datapane_barras,
+            grafico_datapane_sectores
+        ]
     )
 )
-# Agrupar por Páginas
-report = dp.Report(
-    dp.Page(
-        title="Página 1",
-        blocks=[grafico_datapane_lineas, grafico_datapane_barras]
-    ),
-    dp.Page(
-        title="Página 2",
-        blocks=[grafico_datapane_sectores, grafico_datapane_lineas]
-    ),
-    dp.Page(
-        title="Página 3",
-        blocks=[grafico_datapane_barras, grafico_datapane_sectores]
-    ),
-)
+# Guarda el informe en un archivo HTML y ábrelo en el navegador
+report.save(path='Graficos.html', open=True)
