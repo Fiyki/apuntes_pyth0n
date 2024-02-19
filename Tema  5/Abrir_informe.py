@@ -1,9 +1,7 @@
 from PySide6.QtCore import QUrl  # Importa la clase QUrl del módulo QtCore de PySide6
 from PySide6.QtGui import QDesktopServices  # Importa la clase QDesktopServices del módulo QtGui de PySide6
-from PySide6.QtWebEngineWidgets import \
-    QWebEngineView  # Importa la clase QWebEngineView del módulo QtWebEngineWidgets de PySide6
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, \
-    QApplication  # Importa las clases QWidget, QVBoxLayout, QPushButton y QApplication del módulo QtWidgets de PySide6
+from PySide6.QtWebEngineWidgets import QWebEngineView  # Importa la clase QWebEngineView del módulo QtWebEngineWidgets de PySide6
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton,QApplication  # Importa las clases QWidget, QVBoxLayout, QPushButton y QApplication del módulo QtWidgets de PySide6
 
 
 class VentanaInformes(QWidget):  # Definición de una clase VentanaInformes que hereda de QWidget
