@@ -16,14 +16,12 @@ grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas, responsive=False)
 ventas_2021 = df[df['Año'] == 2021]  # Filtra las ventas solo para el año 2021
 ventas_region_2021 = ventas_2021.groupby(['Región']).sum()  # Agrupa las ventas por región y suma
 grafico_matplotlib_barras = ventas_region_2021.plot.bar(y='Ventas', color='green')  # Crea el gráfico de barras al poner plot.bar
-grafico_datapane_barras = dp.Plot(grafico_matplotlib_barras,
-                                  responsive=False)  # Convierte el gráfico en un objeto Datapane Plot
+grafico_datapane_barras = dp.Plot(grafico_matplotlib_barras,responsive=False)  # Convierte el gráfico en un objeto Datapane Plot
 
 # Gráfico de sectores
 ventas_tipo_producto = df.groupby(['Tipo de producto']).sum()  # Agrupa las ventas por tipo de producto y suma
 grafico_sectores = ventas_tipo_producto.plot.pie(y='Ventas', legend=False, ylabel="",cmap='viridis')  # Crea el gráfico de sectores al poner el .plot.pie
-grafico_datapane_sectores = dp.Plot(grafico_sectores,
-                                    responsive=False)  # Convierte el gráfico en un objeto Datapane Plot
+grafico_datapane_sectores = dp.Plot(grafico_sectores,responsive=False)  # Convierte el gráfico en un objeto Datapane Plot
 
 # Creación de informe con selectores
 report = dp.Report(
