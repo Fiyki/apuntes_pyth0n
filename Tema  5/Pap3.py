@@ -7,11 +7,12 @@ fichero_csv = "DI_U05_A02_PP_E_01.csv"
 df = pd.read_csv(fichero_csv)  # Lee el archivo CSV y carga los datos en un DataFrame
 
 # Gráfico de líneas
-ventas_anuales = df.groupby(['Año']).sum()  # Agrupa las ventas por año y suma
+ventas_anuales = df.groupby(['Año'], sort=False).sum()  # Agrupa las ventas por año y suma
 fig, ax = plt.subplots()  # Crea una figura y un objeto de eje Matplotlib
-ventas_anuales.plot(y='Ventas', color='black', ax=ax)  # Crea el gráfico de líneas en el eje
-ax.xaxis.set_major_formatter('{x:.0f}')  # Formatea el eje x para eliminar los decimales
-grafico_datapane_lineas = dp.Plot(fig, responsive=False)  # Convierte la figura de Matplotlib en un objeto Datapane Plot
+# Crea un gráfico de líneas utilizando Matplotlib con las unidades vendidas por mes
+grafico_matplot_lineas = ventas_anuales.plot(y='Ventas', color='black')  # Se establece el color azul para las líneas
+# Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
+grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas, responsive=False)
 
 # Gráfico de barras
 ventas_2021 = df[df['Año'] == 2021]  # Filtra las ventas solo para el año 2021
