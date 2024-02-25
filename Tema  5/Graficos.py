@@ -38,8 +38,6 @@ report = dp.Report(
     dp.Select(
         blocks=[
             grafico_datapane_lineas, grafico_datapane_barras, grafico_datapane_sectores,
-            grafico_datapane_barras, grafico_datapane_sectores, grafico_datapane_barras,
-            grafico_datapane_sectores
         ]
     )
 )

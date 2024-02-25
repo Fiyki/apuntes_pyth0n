@@ -3,6 +3,7 @@ import os  # Importa el módulo os para interactuar con el sistema operativo
 from PySide6.QtGui import QIcon, QKeySequence  # Importa clases necesarias de PySide6
 from PySide6.QtWidgets import QLineEdit
 
+
 class EditorContraseña(QLineEdit):  # Define una clase personalizada que hereda de QLineEdit
     def __init__(self, parent=None):
         super().__init__(parent)  # Llama al constructor de la clase base
@@ -28,7 +29,8 @@ class EditorContraseña(QLineEdit):  # Define una clase personalizada que hereda
         # Agrega un botón al QLineEdit para cambiar la visibilidad de la contraseña
         self.accion_cambiar_visibilidad = self.addAction(self.mostrar, QLineEdit.ActionPosition.TrailingPosition)
         self.accion_cambiar_visibilidad.setShortcut(QKeySequence("Ctrl+M"))  # Establece un atajo de teclado
-        self.accion_cambiar_visibilidad.triggered.connect(self.cambiar_visibilidad)  # Conecta la acción del botón a una función
+        self.accion_cambiar_visibilidad.triggered.connect(
+            self.cambiar_visibilidad)  # Conecta la acción del botón a una función
         self.contraseña_visible = False  # Inicializa una bandera para rastrear la visibilidad de la contraseña
 
     # Función para cambiar la visibilidad de la contraseña
