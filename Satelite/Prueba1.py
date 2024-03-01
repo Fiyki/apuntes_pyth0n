@@ -49,9 +49,9 @@ grafico_matplot_lineas = lineas1.plot(y='Altitud',
 grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas,
                                   responsive=False)  # Crea un objeto de gráfico de Datapane a partir del gráfico de
 # líneas de Matplotlib
-linea2 = df.groupby('Altitud', sort=False).sum()
+linea2 = df.groupby('Paquete', sort=False).sum()
 grafico_matplot_lineas2 = linea2.plot(y='Temperatura', color='blue')
-grafico_matplot_lineas2 = dp.Plot(grafico_matplot_lineas2)
+grafico_matplot_lineas2 = dp.Plot(grafico_matplot_lineas2,responsive=False)
 # Crea un informe de Datapane que contiene el gráfico de líneas
 report = dp.Report(
     dp.Select(
