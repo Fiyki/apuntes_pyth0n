@@ -4,7 +4,7 @@ import pandas as pd  # Importa la biblioteca pandas para la manipulación de dat
 fichero_csv = "2024.02.24_1-1.csv"  # Ruta del archivo CSV a cargar
 
 # Cargar el archivo CSV en un DataFrame
-df = pd.read_csv(fichero_csv, encoding='latin1')  # Carga el archivo CSV en un DataFrame
+df = pd.read_csv(fichero_csv)  # Carga el archivo CSV en un DataFrame
 
 # Filtrar los datos de los paquetes del 1 al 10
 datos_uno_diez = df[
@@ -41,14 +41,14 @@ lineas1 = df.groupby('Paquete',
                      sort=False).sum()  # Agrupa los datos por altitud y suma los metros para cada altitud
 
 # Crea un gráfico de líneas utilizando Matplotlib con los metros por altitud
-grafico_matplot_lineas = lineas1.plot(y='Altitud_[m]',
+grafico_matplot_lineas = lineas1.plot(y='Altitud',
                                       color='black')  # Se establece el color negro para las líneas
 
 # Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
 grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas,
                                   responsive=False)  # Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
-linea2 = df.groupby('Altitud_[m]', sort=False).sum()
-grafico_matplot_lineas2 = linea2.plot(y='Temperatura_[ºC]', color='blue')
+linea2 = df.groupby('Temperatura', sort=False).sum()
+grafico_matplot_lineas2 = linea2.plot(y='Paquete', color='blue')
 grafico_matplot_lineas2 = dp.Plot(grafico_matplot_lineas2)
 # Crea un informe de Datapane que contiene el gráfico de líneas
 report = dp.Report(

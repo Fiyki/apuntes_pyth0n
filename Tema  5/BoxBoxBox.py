@@ -34,11 +34,11 @@ class Informes(QWidget):
         informe_seleccionado = self.combobox_informes.currentText()
         # Definición de las rutas de los informes según la selección
         if informe_seleccionado == "Informe 1":
-            ruta = "Remix.html"
+            ruta = "Graficos.html"
         elif informe_seleccionado == "Informe 2":
             ruta = "Informe_Ventas.html"
         else:
-            ruta = "Informe1.html"
+            ruta = "Informe2.html"
 
         # Lectura del contenido HTML del informe seleccionado y carga en la vista del navegador web
         self.view.setHtml(open(ruta).read())
