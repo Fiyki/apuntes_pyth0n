@@ -2,7 +2,7 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget, QComboBox
 
 
-class VentanaInformes(QWidget):
+class Informes(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         # Configuración del diseño vertical para la ventana
@@ -34,9 +34,9 @@ class VentanaInformes(QWidget):
         informe_seleccionado = self.combobox_informes.currentText()
         # Definición de las rutas de los informes según la selección
         if informe_seleccionado == "Informe 1":
-            ruta = "Informe.html"
+            ruta = "Remix.html"
         elif informe_seleccionado == "Informe 2":
-            ruta = "InformeDeVentas.html"
+            ruta = "Informe_Ventas.html"
         else:
             ruta = "Informe1.html"
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # Creación de la aplicación Qt
     app = QApplication([])
     # Creación de la ventana de informes y visualización
-    ventana_informes = VentanaInformes()
-    ventana_informes.show()
+    informes = Informes()
+    informes.show()
     # Ejecución del bucle de eventos de la aplicación
     app.exec()

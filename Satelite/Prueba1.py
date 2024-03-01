@@ -12,7 +12,8 @@ datos_uno_diez = df[
 unidades_uno_diez = datos_uno_diez["Paquete"].sum()  # Suma los valores de la columna "Paquete" filtrados anteriormentew
 # Filtrar los datos de los paquetes de 11 a 20
 datos_once_veinte = df[
-    df["Paquete"] >= 11 & (df["Paquete"] <= 20)]  # Filtra los datos del DataFrame donde el valor de "Paquete" es mayor o igual a 11
+    df["Paquete"] >= 11 & (df[
+                               "Paquete"] <= 20)]  # Filtra los datos del DataFrame donde el valor de "Paquete" es mayor o igual a 11
 unidades_once_veinte = datos_once_veinte[
     "Paquete"].sum()  # Suma los valores de la columna "Paquete" filtrados anteriormente
 
@@ -46,13 +47,15 @@ grafico_matplot_lineas = lineas1.plot(y='Altitud_[m]',
 # Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
 grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas,
                                   responsive=False)  # Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
-
+linea2 = df.groupby('Altitud_[m]', sort=False).sum()
+grafico_matplot_lineas2 = linea2.plot(y='Temperatura_[ºC]', color='blue')
+grafico_matplot_lineas2 = dp.Plot(grafico_matplot_lineas2)
 # Crea un informe de Datapane que contiene el gráfico de líneas
 report = dp.Report(
     dp.Select(
         blocks=[
             comparativa_paquetes,  # Agrega el objeto BigNumber al informe
-            grafico_datapane_lineas,  # Agrega el gráfico de líneas al informe
+            grafico_datapane_lineas, grafico_matplot_lineas2,  # Agrega el gráfico de líneas al informe
             report_visualizar  # Agrega la tabla de datos al informe
         ]
     )
