@@ -47,15 +47,15 @@ grafico_matplot_lineas = lineas1.plot(y='Altitud',
 # Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
 grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas,
                                   responsive=False)  # Crea un objeto de gráfico de Datapane a partir del gráfico de líneas de Matplotlib
-linea2 = df.groupby('Temperatura', sort=False).sum()
-grafico_matplot_lineas2 = linea2.plot(y='Paquete', color='blue')
+linea2 = df.groupby('Altitud', sort=False).sum()
+grafico_matplot_lineas2 = linea2.plot(y='Temperatura', color='blue')
 grafico_matplot_lineas2 = dp.Plot(grafico_matplot_lineas2)
 # Crea un informe de Datapane que contiene el gráfico de líneas
 report = dp.Report(
     dp.Select(
         blocks=[
             comparativa_paquetes,  # Agrega el objeto BigNumber al informe
-            grafico_datapane_lineas, grafico_matplot_lineas2,  # Agrega el gráfico de líneas al informe
+            grafico_datapane_lineas, grafico_matplot_lineas2,  # Agrega los gráfico de líneas al informe
             report_visualizar  # Agrega la tabla de datos al informe
         ]
     )
