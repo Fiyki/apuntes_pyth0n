@@ -1,5 +1,5 @@
-from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget, QComboBox
+from PySide6.QtWebEngineWidgets import QWebEngineView  # Importa la clase QWebEngineView para la visualización web
+from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget, QComboBox  # Importa clases para la interfaz gráfica
 
 
 class Informes(QWidget):
@@ -11,6 +11,7 @@ class Informes(QWidget):
 
         # Creación del ComboBox para seleccionar informes
         self.combobox_informes = QComboBox()
+        # Agrega elementos al ComboBox
         self.combobox_informes.addItem("Informe 1")
         self.combobox_informes.addItem("Informe 2")
         self.combobox_informes.addItem("Informe 3")
