@@ -2,8 +2,8 @@ from PySide6.QtCore import Slot
 from PySide6.QtGui import QIcon, Qt, QAction
 from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
-from Cronometro.DI_U04_A02_01 import CronometroUI
-from Cronometro.DI_U04_A03_01_0 import mostrar_aviso
+import DI_U04_A02_01
+import DI_U04_A03_01_0
 
 
 @Slot()
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     tray.setVisible(True)
     tray.activated.connect(mostrar_ocultar)
     # Creamos un componente cronometro:
-    cronometro = CronometroUI()
+    cronometro = DI_U04_A02_01.CronometroUI()
     # Cambiamos las propiedades del componente
     cronometro.setWindowTitle("Cronometro ")
     # Para que siempre sea visible
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     # añadimos el menu al icono
     tray.setContextMenu(menu)
     # usamos la señal del componente
-    cronometro.mensaje.connect(mostrar_aviso)
+    cronometro.mensaje.connect(DI_U04_A03_01_0.mostrar_aviso)
 
     cronometro.show()
     app.exec()
