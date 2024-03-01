@@ -1,14 +1,11 @@
-# Importación de las clases necesarias desde PySide6
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget, QComboBox
-from PySide6.QtCore import QUrl
 
-# Definición de la clase VentanaInformes que hereda de QWidget
+
 class VentanaInformes(QWidget):
-    # Método de inicialización de la clase
     def __init__(self, parent=None):
         super().__init__(parent)
-        # Creación del diseño vertical para la ventana
+        # Configuración del diseño vertical para la ventana
         self.layout_vertical = QVBoxLayout()
         self.setLayout(self.layout_vertical)
 
@@ -28,20 +25,24 @@ class VentanaInformes(QWidget):
         # Establecimiento del tamaño inicial de la ventana
         self.resize(600, 800)
 
+        # Llamada al método abrir_informe para cargar el informe al iniciar la ventana
+        self.abrir_informe()
+
     # Método para abrir el informe seleccionado
     def abrir_informe(self):
         # Obtención del texto seleccionado en el ComboBox
         informe_seleccionado = self.combobox_informes.currentText()
         # Definición de las rutas de los informes según la selección
         if informe_seleccionado == "Informe 1":
-            ruta = "informe.html"
+            ruta = "Informe.html"
         elif informe_seleccionado == "Informe 2":
-            ruta = "informe2.html"
-        elif informe_seleccionado == "Informe 3":
-            ruta = "Informe_Ventas.html"
+            ruta = "InformeDeVentas.html"
+        else:
+            ruta = "Informe1.html"
 
         # Lectura del contenido HTML del informe seleccionado y carga en la vista del navegador web
         self.view.setHtml(open(ruta).read())
+
 
 # Entrada principal del programa
 if __name__ == "__main__":
