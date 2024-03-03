@@ -1,6 +1,9 @@
-from PySide6.QtCore import QTime, QTimer, Slot, QElapsedTimer, QSize, Qt, Signal  # Importa clases del módulo QtCore de PySide6
+from PySide6.QtCore import QTime, QTimer, Slot, QElapsedTimer, QSize, Qt, \
+    Signal  # Importa clases del módulo QtCore de PySide6
 from PySide6.QtGui import QIcon  # Importa la clase QIcon del módulo QtGui de PySide6
-from PySide6.QtWidgets import QLabel, QWidget, QPushButton, QVBoxLayout, QCheckBox, QTimeEdit, QHBoxLayout  # Importa clases de widgets del módulo QtWidgets de PySide6
+from PySide6.QtWidgets import QLabel, QWidget, QPushButton, QVBoxLayout, QCheckBox, QTimeEdit, \
+    QHBoxLayout  # Importa clases de widgets del módulo QtWidgets de PySide6
+
 
 class Cronometro():  # Define una clase Cronometro
     def __init__(self):  # Inicializa el objeto Cronometro
@@ -13,13 +16,15 @@ class Cronometro():  # Define una clase Cronometro
         self.__acumulador = 0  # Reinicia el acumulador
 
     def obtenerTiempo(self):  # Método para obtener el tiempo transcurrido
-        return QTime(0, 0).addMSecs(self.__tiempo_transcurrido.elapsed() - self.__acumulador)  # Retorna el tiempo transcurrido
+        return QTime(0, 0).addMSecs(
+            self.__tiempo_transcurrido.elapsed() - self.__acumulador)  # Retorna el tiempo transcurrido
 
     def pausar(self):  # Método para pausar el cronómetro
         self.__tiempo_pausa.restart()  # Reinicia el temporizador de pausa
 
     def continuar(self):  # Método para continuar el cronómetro después de pausarlo
         self.__acumulador = self.__acumulador + self.__tiempo_pausa.elapsed()  # Incrementa el acumulador con el tiempo de pausa
+
 
 class CronometroUI(QWidget):  # Define una clase para la interfaz de usuario del cronómetro
     mensaje = Signal(str)  # Señal para enviar mensajes
@@ -76,10 +81,14 @@ class CronometroUI(QWidget):  # Define una clase para la interfaz de usuario del
         layout.addWidget(self.boton_inicio)  # Agrega el botón de inicio al diseño principal
         layout.addWidget(self.boton_pausa)  # Agrega el botón de pausa al diseño principal
 
-        self.__tiempo.timeout.connect(self.actualizar_tiempo)  # Conecta la señal timeout del temporizador a la función de actualización del tiempo
-        self.boton_inicio.clicked.connect(self.iniciar_parar)  # Conecta la señal clicked del botón de inicio a la función de inicio/parada
-        self.boton_pausa.clicked.connect(self.pausar_continuar)  # Conecta la señal clicked del botón de pausa a la función de pausa/continuar
-        self.editor_tiempo_aviso.timeChanged.connect(self.actualizar_tiempo_aviso)  # Conecta la señal timeChanged del editor de tiempo a la función de actualización del tiempo de aviso
+        self.__tiempo.timeout.connect(
+            self.actualizar_tiempo)  # Conecta la señal timeout del temporizador a la función de actualización del tiempo
+        self.boton_inicio.clicked.connect(
+            self.iniciar_parar)  # Conecta la señal clicked del botón de inicio a la función de inicio/parada
+        self.boton_pausa.clicked.connect(
+            self.pausar_continuar)  # Conecta la señal clicked del botón de pausa a la función de pausa/continuar
+        self.editor_tiempo_aviso.timeChanged.connect(
+            self.actualizar_tiempo_aviso)  # Conecta la señal timeChanged del editor de tiempo a la función de actualización del tiempo de aviso
 
     @Slot()  # Decorador para marcar un método como un slot
     def actualizar_tiempo(self):  # Método para actualizar el tiempo del cronómetro
@@ -88,8 +97,10 @@ class CronometroUI(QWidget):  # Define una clase para la interfaz de usuario del
             crono_actual.toString("hh:mm:ss"))
         self.etiqueta.repaint()  # Repinta la etiqueta para actualizar el valor antes de lanzar el aviso
         if self.aviso.isChecked():  # Verifica si la casilla de verificación de aviso está marcada
-            if -200 < self.__tiempo_aviso.msecsTo(crono_actual) < 200:  # Comprueba si el tiempo de aviso se ha alcanzado
-                self.mensaje.emit("Tiempo límite alcanzado")  # Emite la señal de mensaje con el texto "Tiempo límite alcanzado"
+            if -200 < self.__tiempo_aviso.msecsTo(
+                    crono_actual) < 200:  # Comprueba si el tiempo de aviso se ha alcanzado
+                self.mensaje.emit(
+                    "Tiempo límite alcanzado")  # Emite la señal de mensaje con el texto "Tiempo límite alcanzado"
 
     @Slot()  # Decorador para marcar un método como un slot
     def iniciar_parar(self):  # Método para iniciar o detener el cronómetro
@@ -107,7 +118,8 @@ class CronometroUI(QWidget):  # Define una clase para la interfaz de usuario del
         else:  # Si el cronómetro está en estado iniciado
             self.__tiempo.stop()  # Detiene el temporizador para actualizar la GUI
             self.__estado = self.CRONOMETRO_PARADO  # Cambia el estado del cronómetro a parado
-            self.boton_inicio.setIcon(QIcon(self.LISTA_ICONOS['restart']))  # Cambia el icono del botón de inicio a "restart"
+            self.boton_inicio.setIcon(
+                QIcon(self.LISTA_ICONOS['restart']))  # Cambia el icono del botón de inicio a "restart"
             self.boton_pausa.setDisabled(True)  # Deshabilita el botón de pausa
 
     @Slot()  # Decorador para marcar un método como un slot
@@ -117,7 +129,8 @@ class CronometroUI(QWidget):  # Define una clase para la interfaz de usuario del
             self.__tiempo.stop()  # Detiene el temporizador para actualizar la GUI
 
             self.__estado = self.CRONOMETRO_PAUSADO  # Cambia el estado del cronómetro a pausado
-            self.boton_pausa.setIcon(QIcon(self.LISTA_ICONOS['resume']))  # Cambia el icono del botón de pausa a "resume"
+            self.boton_pausa.setIcon(
+                QIcon(self.LISTA_ICONOS['resume']))  # Cambia el icono del botón de pausa a "resume"
             self.boton_inicio.setDisabled(True)  # Deshabilita el botón de inicio
         else:  # Si el cronómetro está en estado pausado
             self.__cronometro.continuar()  # Continúa el cronómetro después de la pausa
