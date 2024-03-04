@@ -52,8 +52,18 @@ grafico_datapane_lineas = dp.Plot(grafico_matplot_lineas,
 linea2 = df.groupby('Paquete', sort=False).sum()
 grafico_matplot_lineas2 = linea2.plot(y='Temperatura', color='blue')
 grafico_matplot_lineas2 = dp.Plot(grafico_matplot_lineas2,responsive=False)
+
+# Añadir título h2
+titulo_h2 = dp.HTML("<h2 style='text-align:center;'>Proyectito: Análisis de datos satélite</h2>")
+
+# Añadir imagen PNG
+imagen_png = dp.Media("cohete.png")
+
+
 # Crea un informe de Datapane que contiene el gráfico de líneas
 report = dp.Report(
+    titulo_h2,
+    imagen_png,
     dp.Select(
         blocks=[
             comparativa_paquetes,  # Agrega el objeto BigNumber al informe
