@@ -11,12 +11,12 @@ class VentanaInformes(QWidget):  # Definición de una clase VentanaInformes que 
 
         boton_abrir = QPushButton('Abrir informe')  # Crea un botón con el texto 'Abrir informe'
         boton_abrir.clicked.connect(
-            self.abrir_informe)  # Conecta la señal clicked del botón con el método abrir_informe
+        self.abrir_informe)  # Conecta la señal clicked del botón con el método abrir_informe
         self.layout_vertical.addWidget(boton_abrir)  # Agrega el botón al layout vertical
 
         ruta_absoluta = "informe2.html"  # Ruta absoluta del archivo HTML
         view = QWebEngineView()  # Crea un widget QWebEngineView para mostrar contenido web
-        view.setUrl(QUrl.fromLocalFile(ruta_absoluta))  # Establece la URL del QWebEngineView como el archivo HTML
+        view.setHtml(open(ruta_absoluta).read())# Establece la URL del QWebEngineView como el archivo HTML
         self.layout_vertical.addWidget(view)  # Agrega el QWebEngineView al layout vertical
 
         self.resize(600, 800)  # Establece el tamaño inicial de la ventana
