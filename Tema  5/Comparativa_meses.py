@@ -25,28 +25,8 @@ comparativa_fin_año = dp.BigNumber(
     is_upward_change=unidades_diciembre > unidades_noviembre
 )
 
-# Filtrar los datos del mes de enero
-datos_enero = df[df["Mes"] == "Enero"]
-unidades_enero = datos_enero["Unidades"].sum()  # Sumar las unidades vendidas en enero
 
-# Filtrar los datos del mes de febrero
-datos_febrero = df[df["Mes"] == "Febrero"]
-unidades_febrero = datos_febrero["Unidades"].sum()  # Sumar las unidades vendidas en febrero
-
-# Calcular la diferencia entre las unidades vendidas en febrero y enero
-diferencia_febrero_enero = unidades_febrero - unidades_enero
-
-# Crear el objeto BigNumber para la comparativa entre enero y febrero
-comparativa_principio_año = dp.BigNumber(
-    heading="Unidades totales (Enero vs Febrero)",
-    value=unidades_febrero,
-    change=abs(diferencia_febrero_enero),
-    is_upward_change=diferencia_febrero_enero > 0
-)
-
-# Crear una lista con ambas comparativas
-comparativas = [comparativa_fin_año, comparativa_principio_año]
 
 # Guardar el informe de las comparativas en un solo archivo HTML
-report = dp.Report(*comparativas)
+report = dp.Report(comparativa_fin_año)
 report.save(path="comparativa_año.html", open=True)
